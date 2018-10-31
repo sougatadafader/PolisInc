@@ -80,6 +80,11 @@ describe('ARITHMATIC PROBLEM', () => {
       assert.strictEqual(result, 126);
     });
 
+    it('should perform multiplication before addition', () => {
+      const result = expression.solve('2 * 42 + 21');
+      assert.strictEqual(result, 105);
+    });
+
     it('should perform division before addition', () => {
       const result = expression.solve('42 + 42 / 7');
       assert.strictEqual(result, 48);
@@ -93,6 +98,24 @@ describe('ARITHMATIC PROBLEM', () => {
     it('should perform division before subtraction', () => {
       const result = expression.solve('42 - 24 / 6');
       assert.strictEqual(result, 38);
+    });
+
+    it('should throw if numeric is invalid', () => {
+      assert.throws(() => {
+        const result = expression.solve('1 - (1)');
+      }, errors.ExpressionParserError);
+    });
+
+    it('should throw if numeric is invalid', () => {
+      assert.throws(() => {
+        const result = expression.solve('0 * f');
+      }, errors.ExpressionParserError);
+    });
+
+     it('should throw if numeric is invalid', () => {
+      assert.throws(() => {
+        const result = expression.solve('1 ÷ 4');
+      }, errors.ExpressionParserError);
     });
   });
 
