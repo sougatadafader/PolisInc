@@ -117,6 +117,25 @@ describe('ARITHMATIC PROBLEM', () => {
         const result = expression.solve('1 ÷ 4');
       }, errors.ExpressionParserError);
     });
+
+     it('should throw if numeric proceeded by numeric', () => {
+      assert.throws(() => {
+        const result = expression.solve('1+2 5 +');
+      }, errors.ExpressionParserError);
+    });
+
+     it('should throw if operator not proceeded by numeric', () => {
+      assert.throws(() => {
+        const result = expression.solve('-1 + 1');
+      }, errors.ExpressionParserError);
+    });
+     
+     it('should throw if Expression has non-numeric string', () => {
+      assert.throws(() => {
+        const result = expression.solve('1.1 * 2.20');
+      }, errors.ExpressionParserError);
+    });
+
   });
 
 });
